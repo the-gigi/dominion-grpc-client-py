@@ -4,7 +4,7 @@ import grpc
 
 from dominion_object_model import object_model
 from dominion_grpc_proto import dominion_pb2_grpc
-from dominion_grpc_proto.dominion_pb2 import PlayerInfo, Card
+from dominion_grpc_proto.dominion_pb2 import PlayerInfo, Card, ActionResponse
 
 
 class Client(object_model.GameClient, object_model.Player):
@@ -54,7 +54,10 @@ class Client(object_model.GameClient, object_model.Player):
         self.done()
 
     def respond(self, action, *args):
-        self._player.respond(action, *args)
+        response = self._player.respond(action, *args)
+        card = Card(action)
+        payload = json.dumps(response)
+        self._server.Respond(ActionResponse(card, payload))
 
     def on_game_event(self, event):
         self._player.on_game_event(event)

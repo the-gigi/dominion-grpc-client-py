@@ -41,6 +41,8 @@ username = <your user name>
 
 ## Building the package
 
+Bump the version in setup.py
+
 Here is the command to build the package:
 
 ```
@@ -53,7 +55,7 @@ The result is tar-gzipped file in the dist subdirectory:
 ```
 (🐙)/dominion-grpc-client-py
 $ ls dist
-ddominion_grpc_client-0.1.0-py3-none-any.whl
+ddominion_grpc_client-0.2.0-py3-none-any.whl
 ```
 
 ## Publish the package
@@ -62,12 +64,12 @@ Next, we can upload the package using twine to PyPI.
 
 ```
 (🐙)/dominion-grpc-client-py
-$ poetry run twine upload -p <redacted> dist/*.whl
+$ poetry run twine upload -p ${PYPI_PASSWORD} dist/*.whl
 
 Uploading distributions to https://upload.pypi.org/legacy/
-Uploading dominion_grpc_client-0.1.0-py3-none-any.whl
-100%|██████████████████████████████████| 7.96k/7.96k [00:03<00:00, 2.52kB/s]
+Uploading dominion_grpc_client-0.2.0-py3-none-any.whl
+100%|█████████████████████████████| 8.07k/8.07k [00:01<00:00, 4.31kB/s]
 
 View at:
-https://pypi.org/project/dominion-grpc-client/0.1.0/
+https://pypi.org/project/dominion-grpc-client/0.2.0/
 ```
