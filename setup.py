@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='dominion-grpc-client',
-      version='0.2.0',
+      version='0.3.0',
       url='https://github.com/the-gigi/dominion-grpc-client-py',
       license='MIT',
       author='Gigi Sayfan',
