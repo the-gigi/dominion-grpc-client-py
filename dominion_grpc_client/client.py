@@ -55,9 +55,10 @@ class Client(object_model.GameClient, object_model.Player):
 
     def respond(self, action, *args):
         response = self._player.respond(action, *args)
-        card = Card(action)
+        card = Card(name=action)
         payload = json.dumps(response)
-        self._server.Respond(ActionResponse(card, payload))
+        response = ActionResponse(card=card, payload=payload)
+        self._server.Respond(response)
 
     def on_game_event(self, event):
         self._player.on_game_event(event)
