@@ -37,10 +37,9 @@ class Client(object_model.GameClient, object_model.Player):
             state = json.loads(message.data)
             self.on_state_change(state)
         elif message.type == 'ack':
-            print('Received ack! starting game...')
+            print('Received ack!')
             data = json.loads(message.data)
             self.name = data['name']
-            self.start_game()
         else:
             print('Unknown message type:', message.type)
 
@@ -67,10 +66,10 @@ class Client(object_model.GameClient, object_model.Player):
 
     # GameClient interface
     def play_action_card(self, card_type):
-        self._server.PlayCard(Card(card_type))
+        self._server.PlayCard(Card(name=card_type))
 
     def buy(self, card_type):
-        self._server.Buy(Card(card_type))
+        self._server.Buy(Card(name=card_type))
 
     def done(self):
         self._server.Done(PlayerInfo(name=self.name))
