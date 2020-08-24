@@ -51,7 +51,6 @@ class Client(object_model.GameClient, object_model.Player):
     # Player interface
     def play(self):
         self._player.play()
-        self.done()
 
     def respond(self, action, *args):
         response = self._player.respond(action, *args)
