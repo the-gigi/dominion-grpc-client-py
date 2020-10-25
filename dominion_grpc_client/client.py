@@ -15,14 +15,14 @@ class Client(object_model.GameClient, object_model.Player):
         self._server = None
 
     def run(self, host='localhost', port=50051):
-        with grpc.insecure_channel(f'{host}:{port}') as channel:
-            self._server = dominion_pb2_grpc.DominionServerStub(channel)
-            messages = self._server.Join(PlayerInfo(name=self.name))
-            for message in messages:
-                try:
+        try:
+            with grpc.insecure_channel(f'{host}:{port}') as channel:
+                self._server = dominion_pb2_grpc.DominionServerStub(channel)
+                messages = self._server.Join(PlayerInfo(name=self.name))
+                for message in messages:
                     self._handle_message(message)
-                except Exception as e:
-                    self._handle_message(message)
+        except Exception as e:
+            self.on_game_event(dict(event='server error', exception=e))
 
     def _handle_message(self, message):
         if message.type == 'play':
@@ -37,7 +37,6 @@ class Client(object_model.GameClient, object_model.Player):
             state = json.loads(message.data)
             self.on_state_change(state)
         elif message.type == 'ack':
-            print('Received ack!')
             data = json.loads(message.data)
             self.name = data['name']
         else:
