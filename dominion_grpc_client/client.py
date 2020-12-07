@@ -1,4 +1,5 @@
 import json
+from threading import Thread
 
 import grpc
 
@@ -48,7 +49,7 @@ class Client(object_model.GameClient, object_model.Player):
 
     # Player interface
     def play(self):
-        self._player.play()
+        Thread.start(target=lambda: self._player.play())
 
     def respond(self, action, *args):
         response = self._player.respond(action, *args)
