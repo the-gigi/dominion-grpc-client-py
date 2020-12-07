@@ -55,7 +55,7 @@ The result is tar-gzipped file in the dist subdirectory:
 ```
 (🐙)/dominion-grpc-client-py
 $ ls dist
-dominion_grpc_client-0.6.0-py3-none-any.whl
+dominion_grpc_client-0.8.0-py3-none-any.whl
 ```
 
 ## Publish the package
@@ -67,9 +67,9 @@ Next, we can upload the package using twine to PyPI.
 $ poetry run twine upload -p ${PYPI_PASSWORD} dist/*.whl
 
 Uploading distributions to https://upload.pypi.org/legacy/
-Uploading dominion_grpc_client-0.6.0-py3-none-any.whl
+Uploading dominion_grpc_client-0.8.0-py3-none-any.whl
 100%|█████████████████████████████| 8.07k/8.07k [00:01<00:00, 4.31kB/s]
 
 View at:
-https://pypi.org/project/dominion-grpc-client/0.3/
+https://pypi.org/project/dominion-grpc-client/0.8/
 ```
