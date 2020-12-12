@@ -1,4 +1,6 @@
 import json
+import time
+
 from threading import Thread
 
 import grpc
@@ -14,6 +16,7 @@ class Client(object_model.GameClient, object_model.Player):
         self._player = player_factory(self)
         self._state = None
         self._server = None
+        self._joined = False
 
     def run(self, host='localhost', port=50051):
         try:
@@ -40,10 +43,13 @@ class Client(object_model.GameClient, object_model.Player):
         elif message.type == 'ack':
             data = json.loads(message.data)
             self.name = data['name']
+            self._joined = True
         else:
             print('Unknown message type:', message.type)
 
     def start_game(self):
+        while not self._joined:
+            time.sleep(0.1)
         pi = PlayerInfo(name=self.name)
         self._server.Start(pi)
 
