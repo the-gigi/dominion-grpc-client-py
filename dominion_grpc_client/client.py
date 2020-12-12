@@ -23,8 +23,12 @@ class Client(object_model.GameClient, object_model.Player):
             with grpc.insecure_channel(f'{host}:{port}') as channel:
                 self._server = dominion_pb2_grpc.DominionServerStub(channel)
                 messages = self._server.Join(PlayerInfo(name=self.name))
-                for message in messages:
-                    self._handle_message(message)
+                while True:
+                    for message in messages:
+                        try:
+                            self._handle_message(message)
+                        except Exception as e:
+                            self.on_game_event(dict(event='handle_messge() failed', exception=e))
         except Exception as e:
             self.on_game_event(dict(event='server error', exception=e))
 
@@ -55,7 +59,7 @@ class Client(object_model.GameClient, object_model.Player):
 
     # Player interface
     def play(self):
-        Thread.start(target=lambda: self._player.play())
+        Thread(target=lambda: self._player.play()).start()
 
     def respond(self, action, *args):
         response = self._player.respond(action, *args)
