@@ -1,7 +1,7 @@
 import json
 import time
 
-from threading import Thread
+from multiprocessing import Process
 
 import grpc
 
@@ -59,7 +59,7 @@ class Client(object_model.GameClient, object_model.Player):
 
     # Player interface
     def play(self):
-        Thread(target=lambda: self._player.play()).start()
+        Process(target=lambda: self._player.play()).start()
 
     def respond(self, action, *args):
         response = self._player.respond(action, *args)
