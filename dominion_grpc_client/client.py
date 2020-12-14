@@ -1,5 +1,4 @@
 import json
-import time
 
 import multiprocessing as mp
 from threading import Thread
@@ -31,11 +30,8 @@ class Client(object_model.GameClient):
                 messages = self._server.Join(PlayerInfo(name=self.name))
                 while True:
                     for message in messages:
-                        try:
-                            data = json.loads(message.data) if message.data else ''
-                            self._in_queue.put((message.type, data))
-                        except Exception as e:
-                            print(exception=e)
+                        data = json.loads(message.data) if message.data else ''
+                        self._in_queue.put((message.type, data))
         except Exception as ee:
             print(exception=ee)
 
@@ -57,15 +53,8 @@ class Client(object_model.GameClient):
 
             if not self._out_response_queue.empty():
                 action, data = self._out_response_queue.get_nowait()
-                print(f'!!!! {action} {data}')
                 if action == 'respond':
-                    print('**** _process_outgoing_messages() BEFORE respond')
-                    try:
-                        self.respond(*data)
-                    except Exception as e:
-                        print(e)
-                        self.respond(*data)
-                    print('**** _process_outgoing_messages() AFTER respond')
+                    self.respond(*data)
                 else:
                     raise RuntimeError('Unknown action in response queue: ' + action)
 
@@ -81,9 +70,7 @@ class Client(object_model.GameClient):
         card = Card(name=action)
         payload = json.dumps(response)
         response = ActionResponse(card=card, payload=payload)
-        print(f'#### BEFORE self._server.Respond({card}, {payload}')
         self._server.Respond(response)
-        print(f'#### BEFORE self._server.Respond({card}, {payload}')
 
     # GameClient interface
     def play_action_card(self, card_name):
