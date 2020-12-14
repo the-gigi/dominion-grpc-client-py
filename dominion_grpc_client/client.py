@@ -30,8 +30,11 @@ class Client(object_model.GameClient):
                 messages = self._server.Join(PlayerInfo(name=self.name))
                 while True:
                     for message in messages:
-                        data = json.loads(message.data) if message.data else ''
-                        self._in_queue.put((message.type, data))
+                        try:
+                            data = json.loads(message.data) if message.data else ''
+                            self._in_queue.put((message.type, data))
+                        except Exception as e:
+                            print(exception=e)
         except Exception as ee:
             print(exception=ee)
 
