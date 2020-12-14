@@ -1,0 +1,22 @@
+-[tool.poetry]
+-name = "dominion-grpc-client-py"
+-version = "0.14.0"
+-description = ""
+-authors = ["the-gigi <the.gigi@gmail.com>"]
+-license = "MIT"
+-
+-[tool.poetry.dependencies]
+-python = "^3.8"
+-dominion-object-model = "^1.1.0"
+-dominion-grpc-proto = "^0.3.0"
+-
+-grpcio = "^1.30.0"
+-grpcio-tools = "^1.30.0"
+-
+-[tool.poetry.dev-dependencies]
+-wheel = "^0.34.2"
+-twine = "^3.2.0"
+-
+-[build-system]
+-requires = ["poetry>=0.12"]
+-build-backend = "poetry.masonry.api"
