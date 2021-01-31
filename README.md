@@ -1,6 +1,6 @@
 # Dominion gRPC client
 
-Client library using the gRPC protocol for the Dominion project
+Client library using the gRPC protocol for the [Dominion](https://github.com/the-gigi/dominion) project
 
 # Build and publish
 
