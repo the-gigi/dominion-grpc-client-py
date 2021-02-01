@@ -9,6 +9,8 @@ If you just want to implement a player or a client library you can stop reading.
 
 ## Pre-requisites
 
+You needto perform these steps just once.
+
 - Install [pyenv](https://github.com/pyenv/pyenv) or [pyenv-win](https://github.com/pyenv-win/pyenv-win)
 - Install [poetry](https://python-poetry.org/docs/#installation)
 
@@ -38,6 +40,18 @@ username = <your user name>
 repository = https://pypi.org/legacy/
 username = <your user name>
 ```
+
+## Bump the version
+
+This is important. Whenever you update the package you need to bump the version in setup.py.
+
+## Using the Makefile
+
+Just type `make` and a new package will be built and uploaded to PyPI.
+
+You're done 🎉 !!!
+
+If you want to do it manually follow the rest of this guide.
 
 ## Building the package
 

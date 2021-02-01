@@ -34,12 +34,11 @@ class Client(object_model.GameClient):
                             data = json.loads(message.data) if message.data else ''
                             self._in_queue.put((message.type, data))
                         except Exception as e:
-                            print(exception=e)
+                            print(f'exception={e}')
         except Exception as ee:
-            print(exception=ee)
+            print(f'exception={ee}')
 
     def _process_outgoing_messages(self):
-        """ """
         while True:
             if not self._out_queue.empty():
                 action, data = self._out_queue.get_nowait()
@@ -61,7 +60,7 @@ class Client(object_model.GameClient):
                 else:
                     raise RuntimeError('Unknown action in response queue: ' + action)
 
-    def run(self, host='localhost', port=50051):
+    def run(self, host='localhost', port=55555):
         Thread(target=self._process_outgoing_messages).start()
         self._process_incoming_messages(host, port)
 
