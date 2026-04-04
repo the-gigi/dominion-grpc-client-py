@@ -14,7 +14,7 @@ grpcio = "^1.30.0"
 grpcio-tools = "^1.30.0"
 
 [tool.poetry.dev-dependencies]
-wheel = "^0.34.2"
+wheel = "^0.38.1"
 twine = "^3.2.0"
 
 [build-system]
